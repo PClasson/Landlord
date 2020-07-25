@@ -1,11 +1,12 @@
 @page "/fetchdata"
 @inject HttpClient Http
+@inject IIndexedDbFactory DbFactory
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts == null)
+@if (tenants == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -14,20 +15,14 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>ID</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var tenant in tenants)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@tenant.Id</td>
                 </tr>
             }
         </tbody>
@@ -35,21 +30,11 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    List<Tenant> tenants;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
-    }
-
-    public class WeatherForecast
-    {
-        public DateTime Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        using var db = await DbFactory.Create<LandlordDb>();
+        tenants = db.Tenants.ToList();
     }
 }
