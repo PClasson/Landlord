@@ -8,11 +8,11 @@ namespace Landlord.Data
     {
         public LandlordDb(IJSRuntime jSRuntime, string name, int version) : base(jSRuntime, name, version) { }
 
-        public IndexedSet<Tenant> Tenants { get; set; }
+        public IndexedSet<Customer> Customers { get; set; }
         public IndexedSet<InvoiceRow> InvoiceRows { get; set; }
     }
 
-    public class Tenant
+    public class Customer
     {
         [Key]
         public int Id { get; set; }
@@ -33,6 +33,6 @@ namespace Landlord.Data
         public decimal Amount { get; set; }
 
         [Required]
-        public int TenantId { get; set; }
+        public int CustomerId { get; set; }
     }
 }

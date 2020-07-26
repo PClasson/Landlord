@@ -1,5 +1,33 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="mat-layout-grid">
-    @Body
-</div>
+<MatThemeProvider Theme="@theme1">
+    <MatAppBarContainer>
+        <MatAppBar Fixed="true">
+            <MatAppBarRow>
+                <MatAppBarSection>
+                    <MatAppBarTitle>Landlord</MatAppBarTitle>
+                    <MatIconButton Link="/" Icon="home"></MatIconButton>
+                    <MatIconButton Link="customers" Icon="account_circle"></MatIconButton>
+                </MatAppBarSection>
+                <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                    <MatIconButton Link="https://github.com/PClasson/Landlord"><i class="fab fa-github"></i></MatIconButton>
+                </MatAppBarSection>
+            </MatAppBarRow>
+        </MatAppBar>
+
+        <MatAppBarContent>
+            <div class="mat-layout-grid">
+                @Body
+            </div>
+            <MatToastContainer />
+        </MatAppBarContent>
+    </MatAppBarContainer>
+</MatThemeProvider>
+
+@code {
+    MatTheme theme1 = new MatTheme()
+    {
+        Primary = "#37474f",
+        Secondary = "#78909c"
+    };
+}

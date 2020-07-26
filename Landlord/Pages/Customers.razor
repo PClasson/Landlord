@@ -1,0 +1,91 @@
+@page "/customers"
+@inject IIndexedDbFactory DbFactory
+@inject IMatToaster Toaster
+
+@if (customers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1>TODO</h1>
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell">
+            <MatListGroup>
+                <MatListGroupSubHeader>Customer</MatListGroupSubHeader>
+                    <MatList>
+                        <MatListItem>
+                            See all customers
+                        </MatListItem>
+                        <MatListItem>
+                            Add customer
+                        </MatListItem>
+                        <MatListItem>
+                            Delete customer
+                        </MatListItem>
+                        <MatListItem>
+                            Edit customer
+                        </MatListItem>
+                    </MatList>
+            </MatListGroup>
+        </div>
+    </div>
+}
+
+@code {
+    List<Customer> customers;
+
+    //Form binds
+    string customerName;
+    string customerAdress;
+    string customerZipCode;
+    string customerCity;
+    string customerPhone;
+    bool Opened = true;
+
+    void ButtonClicked()
+    {
+        Opened = !Opened;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var db = await DbFactory.Create<LandlordDb>();
+        customers = db.Customers.ToList();
+    }
+
+    void OpenDialog()
+    {
+        customerName = null;
+        customerAdress = null;
+        customerZipCode = null;
+        customerCity = null;
+        customerPhone = null;
+    }
+
+    async void AddCustomer()
+    {
+        var customer = new Customer()
+        {
+            Name = customerName,
+            Adress = customerAdress,
+            ZipCode = customerZipCode,
+            City = customerCity,
+            Phone = customerPhone
+        };
+
+        try
+        {
+            using var db = await DbFactory.Create<LandlordDb>();
+            db.Customers.Add(customer);
+            await db.SaveChanges();
+            customers.Add(customer);
+            Toaster.Add("Customer added!", MatToastType.Success);
+        }
+        catch (Exception ex)
+        {
+            Toaster.Add("Error adding customer!", MatToastType.Danger, ex.Message);
+            Console.WriteLine("Exception caught in AddCustomer");
+        }
+    }
+}
