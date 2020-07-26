@@ -4,3 +4,4 @@ bin-release/
 [Oo]bj/
 [Bb]in/
 .vs
+.DS_Store
