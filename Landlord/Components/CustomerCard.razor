@@ -1,0 +1,35 @@
+@namespace Landlord.Components
+@inject IMatToaster Toaster
+
+<div class="customer-card">
+    <div class="mat-layout-grid">
+        <div class="mat-layout-grid-inner">
+            <div class="mat-layout-grid-cell-span-10">
+                <h3>@Customer.Name</h3>
+                <p>@Customer.Adress, <br/> 
+                @Customer.ZipCode @Customer.City</p>
+                @Customer.Phone
+            </div>
+            <div class="card-actions mat-layout-grid-cell-span-2">
+                <MatIconButton Icon="edit" OnClick="@EditCustomer"></MatIconButton>
+                <MatIconButton Icon="description" OnClick="@CreateInvoice"></MatIconButton>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public Customer Customer { get; set; }
+
+    void EditCustomer()
+    {
+        Toaster.Add("Editing customer!", MatToastType.Success);
+    }
+
+    void CreateInvoice()
+    {
+        Toaster.Add("Creating invoice!", MatToastType.Success);
+    }
+}

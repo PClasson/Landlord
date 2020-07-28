@@ -6,4 +6,61 @@
 
 html, body {
     margin: 0px;
+    color: rgb(233,233,233);
+    background-color: rgb(60,55,61);
 }
+
+.main {
+    margin-top: 5vh;
+    margin-left: 20vw;
+    margin-right: 5vw;
+}
+
+.side-bar {
+    background-color: rgb(54,49,55);
+    height: 100%;
+    width: 15vw;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+    .side-bar-home {
+        margin: auto;
+        margin-top: 5vh;
+        width: 100%;
+        text-align: center;
+    }
+
+        .side-bar-item {
+            margin: 5px;
+            width: 100%;
+        }
+
+    .side-bar-menu {
+        margin: auto;
+        margin-top: 20vh;
+        width: 100%;
+        text-align: center;
+    }
+
+    .side-bar-footer {
+        margin: auto;
+        margin-top: 40vh;
+        width: 100%;
+        text-align: center;
+    }
+
+.customer-card {
+    margin: 0.5rem;
+    min-height:2rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+    .card-actions {
+        margin: auto;
+        display: grid;
+    }

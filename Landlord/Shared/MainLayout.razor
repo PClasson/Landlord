@@ -1,33 +1,27 @@
 ﻿@inherits LayoutComponentBase
 
-<MatThemeProvider Theme="@theme1">
-    <MatAppBarContainer>
-        <MatAppBar Fixed="true">
-            <MatAppBarRow>
-                <MatAppBarSection>
-                    <MatAppBarTitle>Landlord</MatAppBarTitle>
-                    <MatIconButton Link="/Landlord/" Icon="home"></MatIconButton>
-                    <MatIconButton Link="customers" Icon="account_circle"></MatIconButton>
-                </MatAppBarSection>
-                <MatAppBarSection Align="@MatAppBarSectionAlign.End">
-                    <MatIconButton Link="https://github.com/PClasson/Landlord"><i class="fab fa-github"></i></MatIconButton>
-                </MatAppBarSection>
-            </MatAppBarRow>
-        </MatAppBar>
-
-        <MatAppBarContent>
-            <div class="mat-layout-grid">
-                @Body
+<div>
+    <aside class="side-bar">
+        <div class="side-bar-home">
+            <div class="side-bar-item">
+                <MatIcon Icon="alarm"></MatIcon>
             </div>
-            <MatToastContainer />
-        </MatAppBarContent>
-    </MatAppBarContainer>
-</MatThemeProvider>
-
-@code {
-    MatTheme theme1 = new MatTheme()
-    {
-        Primary = "#37474f",
-        Secondary = "#78909c"
-    };
-}
+        </div>
+        <div class="side-bar-menu">
+            <div class="side-bar-item">
+                <MatIconButton Icon="favorite_border" Link="/customers">
+                </MatIconButton>
+            </div>
+        </div>
+        <div class="side-bar-footer">
+            <div class="side-bar-item">
+                <i class="fab fa-github"></i>
+            </div>
+        </div>
+    </aside>
+    <div class="main">
+        <div class="mat-layout-grid">
+            @Body
+        </div>
+    </div>
+</div>
